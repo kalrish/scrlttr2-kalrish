@@ -1,0 +1,24 @@
+\ProvidesFile
+	{mine-DIN-676.lco}
+
+\LoadLetterOption{DIN}
+\LoadLetterOption{kalrish}
+
+\KOMAoption{parskip}{half-}
+
+\addtoplength
+	[0.7]
+	{sigbeforevskip}
+	{\useplength{sigbeforevskip}}
+
+\setkomavar
+	{backaddressseparator}
+	{%
+		\kern
+			.137em
+			\relax%
+		\cdotp%
+		\kern
+			.137em
+			\relax%
+	}
