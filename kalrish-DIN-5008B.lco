@@ -1,0 +1,283 @@
+\ProvidesFile
+	{mine-DIN-5008B.lco}
+
+\LoadLetterOption{DIN5008B}
+\LoadLetterOption{kalrish}
+
+%\RequirePackage
+%	[
+%		ngerman,
+%		num,
+%	]
+%	{isodate}
+
+\newif\ifextrareferences
+\newcommand
+	{\@enableExtraReferences}
+	[1]
+	{\extrareferencestrue}
+\newcommand
+	{\@typesetreference}
+	[1]
+	{%
+		\usekomavar*{#1}%
+		&%
+		\usekomavar{#1}%
+		\\%
+	}
+\let\@extrareferences\@empty
+\newcommand
+	{\AddReference}
+	[3]
+	[]
+	{
+		\g@addto@macro
+			{\@extrareferences}
+			{%
+				#2%
+				&%
+				#1%
+				#3%
+				\\%
+			}
+		\setkomavar
+			{references}
+			{\@extrareferences}
+	}
+
+% captions
+%  yourrefname
+\defcaptionname
+	{
+		ngerman
+	}
+	{\yourrefname}
+	{mit dem Zeichen}
+
+\KOMAoption{backaddress}{underlined}
+\KOMAoption{fromalign}{left}
+\KOMAoption{fromrule}{afteraddress}
+\KOMAoption{numericaldate}{no}
+%\KOMAoption{numericaldate}{yes}
+%\KOMAoption{refline}{nodate}
+
+\removereffields
+
+\setkomafont
+	{fromaddress}
+	{%
+		%\ttfamily%
+		%\rmfamily%
+		%\sffamily%
+		\inconsolata%
+	}
+\setkomafont
+	{fromname}
+	{%
+		%\ttfamily%
+		%\rmfamily%
+		%\sffamily%
+		\inconsolata%
+	}
+%\setkomafont
+%	{refname}
+%	{}
+\setkomafont
+	{refvalue}
+	{%
+		\ttfamily%
+		\small%
+	}
+
+\newkomavar{prelocation}
+\newkomavar{references}
+
+\setkomavar
+	{backaddressseparator}
+	{%
+		\kern
+			.137em
+			\relax%
+		\cdotp%
+		\kern
+			.137em
+			\relax%
+	}
+\setkomavar
+	{location}
+	{%
+		\def\@location@tabular{}%
+		\foreachnonemptykomavar
+			{myref,customer,invoice,references}
+			{\@enableExtraReferences}%
+		\Ifkomavarempty
+			{prelocation}
+			{}
+			{%
+				\g@addto@macro
+					{\@location@tabular}
+					{%
+						\usekomavar{prelocation}%
+					}%
+			}%
+		\Ifkomavarempty
+			{fromemail}
+			{}
+			{%
+				\g@addto@macro
+					{\@location@tabular}
+					{%
+						\emailname%
+						&%
+						\ttfamily%
+						{%
+							\usekomavar[\def\@fromemail]{fromemail}%
+							\href{mailto:\@fromemail}{\@fromemail}%
+						}%
+						\\%
+					}%
+			}%
+		\iffalse%
+			\Ifkomavarempty
+				{fromurl}
+				{}
+				{%
+					\g@addto@macro
+						{\@location@tabular}
+						{%
+							\wwwname%
+							&%
+							\ttfamily%
+							{%
+								\usekomavar[\def\@fromurl]{fromurl}%
+								\href{\@fromurl}{\@fromurl}%
+							}%
+							\\%
+						}%
+				}%
+		\fi%
+		\Ifkomavarempty
+			{fromphone}
+			{}
+			{%
+				\g@addto@macro
+					{\@location@tabular}
+					{%
+						\phonename%
+						&%
+						{%
+							\usekomavar[\def\@fromphone]{fromphone}%
+							\href{tel:\@fromphone}{\@fromphone}%
+						}%
+						\\%
+					}%
+			}%
+		\Ifkomavarempty
+			{frommobilephone}
+			{}
+			{%
+				\g@addto@macro
+					{\@location@tabular}
+					{%
+						\mobilephonename%
+						&%
+						{%
+							\usekomavar[\def\@frommobilephone]{frommobilephone}%
+							\href{tel:\@frommobilephone}{\@frommobilephone}%
+						}%
+						\\%
+					}%
+			}%
+		\Ifkomavarempty
+			{fromfax}
+			{}
+			{%
+				\g@addto@macro
+					{\@location@tabular}
+					{%
+						\faxname%
+						&%
+						\ttfamily%
+						\usekomavar{fromfax}%
+						\\%
+					}%
+			}%
+		\Ifkomavarempty
+			{yourmail}
+			{}
+			{%
+				\g@addto@macro
+					{\@location@tabular}
+					{%
+						\noalign
+							{%
+								\vskip 1mm%
+								\relax%
+							}%
+						\hline%
+						\noalign
+							{%
+								\vskip 1mm%
+								\relax%
+							}%
+						\multicolumn
+							{2}
+							{ >{\usekomafont{refname}} l }
+							{%
+								\ifcurrentbaselanguage
+									{english}
+									{answering}
+									{}%
+								\ifcurrentbaselanguage
+									{german}
+									{in Antwort auf}
+									{}%
+								\ifcurrentbaselanguage
+									{spanish}
+									{en respuesta a}
+									{}%
+							}%
+						\\%
+						\@typesetreference{yourmail}%
+					}%
+			}%
+		\Ifkomavarempty
+			{yourref}
+			{}
+			{%
+				\g@addto@macro
+					{\@location@tabular}
+					{%
+						\@typesetreference{yourref}%
+					}%
+			}%
+		\ifextrareferences%
+			\g@addto@macro
+				{\@location@tabular}
+				{%
+					\noalign
+						{%
+							\vskip 1mm%
+							\relax%
+						}%
+					\hline%
+					\noalign
+						{%
+							\vskip 1mm%
+							\relax%
+						}%
+					\foreachnonemptykomavar
+						{myref,customer,invoice}
+						{\@typesetreference}%
+					\usekomavar{references}%
+				}%
+		\fi%
+		\begin{tabular}{ >{\usekomafont{refname}} l >{\usekomafont{refvalue}} l }%
+		%\begin{tabular}{ >{\usekomafont{refname}} m{27mm} >{\usekomafont{refvalue}} l }%
+		%\begin{tabular}{ >{\usekomafont{refname}} m{18mm} >{\usekomafont{refvalue}} m{\dimexpr\useplength{locwidth}-18mm-20mm\relax} }%
+			\@location@tabular%
+		\end{tabular}%
+	}
+
+%\daymonthsepgerman{}
+%\monthyearsepgerman{}{}
