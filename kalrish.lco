@@ -1,0 +1,828 @@
+\ProvidesFile
+	{mine.lco}
+
+\RequirePackage
+	{array}
+\RequirePackage
+	{iflang}
+\RequirePackage
+	{fontspec}
+%\RequirePackage
+%	{selnolig}
+%\RequirePackage
+%	[
+%		kerning=true,
+%	]
+%	{microtype}
+\RequirePackage
+	{refcount}
+\RequirePackage
+	[
+		allbordercolors={0 0 0.8},
+		%pdfborder={0 0 1},
+	]
+	{hyperref}
+%\RequirePackage
+%	{hyperxmp}
+
+
+% whether printed edition
+% if printed, duplex is assumed
+\newif\ifprinted
+\ifnum\pdf@strcmp{\jobname}{print}=0
+	\printedtrue
+\else
+	\printedfalse
+\fi
+
+
+\pagestyle{myheadings}
+%\markboth
+%	{%
+%		\Ifkomavarempty
+%			{title}
+%			{\usekomavar{subject}}
+%			{\usekomavar{title}}%
+%	}
+%	{\usekomavar{fromname}}
+%	{\usekomavar{date}}
+%\markright
+%	{\usekomavar{date}}
+
+\newlength{\tabcolLlength}
+\newlength{\tabcolRlength}
+\newlength{\posttabularskip}
+\newlength{\pretabularskip}
+
+\setlength{\posttabularskip}{.35\baselineskip}
+\setlength{\pretabularskip}{.35\baselineskip}
+
+\renewcommand*
+	\pagemark
+	{%
+		\usekomafont{pagenumber}%
+		\pagename%
+		~%
+		\thepage%
+		~%
+		\IfLanguageName
+			{english}
+			{of}
+			{}%
+		\IfLanguageName
+			{ngerman}
+			{von}
+			{}%
+		\IfLanguageName
+			{spanish}
+			{de}
+			{}%
+		~%
+		%\letterlastpage%
+		\pageref*{\thisletter.lastpage}%
+	}
+\let\emph\relax% there's no \RedeclareTextFontCommand
+\DeclareTextFontCommand
+	{\emph}
+	{\bfseries}
+\newcommand
+	{\@duplexnotice}
+	{%
+		\hbox
+			{%
+%				%der Umwelt zuliebe
+%				beidseitig bedruckt~--~bitte
+%				umblättern%
+%				%wenden%
+				bitte
+				umblättern%
+				%wenden%
+				~--~%
+				%der Umwelt zuliebe
+				Blatt
+				beidseitig bedruckt
+			}%
+	}
+\newcommand
+	{\DeliveryCertified}
+	[2]
+	{
+		\@Delivery@printed
+		\setkomavar
+			{specialmail}
+			{#1}
+		\@Delivery@PS
+			{%
+				Dieses Schreiben wird
+				dem Empfänger
+				%als
+				per
+				#1
+				unter der
+				\begin{tabbed}{ l >{\ttspaced} l }
+					Sendungsnummer
+					&
+					#2
+				\end{tabbed}
+				%versandt
+				zugesandt.
+	%			und
+	%			%seine Zustellung wird durch die Post
+	%			%seine Zustellung wird von der Post
+	%			%seine Zustellung durch die Post wird
+	%			seine Zustellung durch die Post wird von dieser
+	%			%protokolliert.%
+	%			dokumentiert.%
+			}
+	}
+\newcommand
+	{\DeliveryEmail}
+	[1]
+	{
+		\@Delivery@digital
+%		\setkomavar
+%			{specialmail}
+%			{%
+%				\IfLanguageName
+%					{english}
+%					{as~E-Mail~to}
+%					{}%
+%				\IfLanguageName
+%					{ngerman}
+%					{per~E-Mail~an}
+%					{}%
+%				\IfLanguageName
+%					{spanish}
+%					{por~E-Mail~a}
+%					{}%
+%				%~%
+%				\\%
+%				\ttfamily%
+%				#1%
+%			}
+		\setkomavar
+			{specialmail}
+			{E-Mail}
+		\@Delivery@PS
+			{%
+	%			Dieses Schreiben wird
+	%			%digital
+	%%			per E-Mail an
+	%%			{%
+	%%				\ttfamily
+	%%				#1
+	%%			}%
+	%			an die
+	%			\begin{tabbed}{ l >{\ttfamily} l }
+	%				E-Mail Adresse
+	%				&
+	%				\href{mailto:#1}{#1}
+	%			\end{tabbed}
+	%			%übermittelt.%
+	%			%gesandt.%
+	%			versandt.%
+	%			%und ist ausschließlich für den mit ihr verbundenen rechtsmäßigen Empfänger bestimmt.%
+				Dieses Schreiben wird dem Empfänger an dessen
+				\begin{tabbed}{ l >{\ttfamily} l }
+					E-Mail Adresse
+					&
+					\href{mailto:#1}{#1}
+				\end{tabbed}
+				zugesandt.
+			}
+	}
+\newcommand
+	{\DeliveryFaxDigital}
+	[1]
+	{
+		\@Delivery@digital
+		%%% vorab per Fax
+		\setkomavar
+			{specialmail}
+			{Fax}
+			%{Telefax}
+		\@Delivery@PS
+			{%
+				An Faxnummer #1.%
+			}
+	}
+\newcommand
+	{\DeliveryFaxPrinted}
+	[1]
+	{
+		\@Delivery@printed
+		\setkomavar
+			{specialmail}
+			{Fax}
+			%{Telefax}
+		\@Delivery@PS
+			{%
+				Dieses Schreiben wird ausgedruckt, unterzeichnet und dem Empfänger eingescannt an dessen
+				Faxnummer #1
+				zugesandt.%
+			}
+	}
+\newcommand
+	{\DeliveryPersonal}
+	{
+		\@Delivery@printed
+		\setkomavar
+			{specialmail}
+			{persönlich übergeben}
+		\@Delivery@PS
+			{%
+				\ifprinted%
+					Hiermit bestätigt
+					\vskip 4mm
+					\relax
+					{%
+						\centering
+						\begin{tabular}{ >{\centering\arraybackslash\sffamily\scriptsize} p{25mm} >{\centering\arraybackslash\sffamily\scriptsize} p{105mm} }
+							\hrulefill
+							&
+							\hrulefill
+							\\
+							Anrede
+							&
+							Name
+							\\
+						\end{tabular}
+						\par
+					}
+					\vskip 1mm
+					\relax
+					mit eigenhändiger Unterschrift, dieses Schreiben
+					\vskip 4mm
+					\relax
+					{%
+						\centering
+						am
+						\hskip 3mm
+						\relax
+						\begin{tabular}[t]{ >{\centering\arraybackslash\sffamily\scriptsize} p{13mm} >{\centering\arraybackslash\sffamily\scriptsize} p{40mm} >{\centering\arraybackslash\sffamily\scriptsize} p{22mm} }
+							\hrulefill
+							&
+							\hrulefill
+							&
+							\hrulefill
+							\\
+							Tag
+							&
+							Monat
+							&
+							Jahr
+							\\
+						\end{tabular}
+						\hskip 3mm
+						\relax
+						um
+						\hskip 3mm
+						\relax
+						\begin{tabular}[t]{ >{\centering\arraybackslash\sffamily\scriptsize} p{13mm} >{\centering\arraybackslash\sffamily\scriptsize} p{13mm} }
+							\hrulefill
+							&
+							\hrulefill
+							\\
+							Stunde
+							&
+							Minuten
+							\\
+						\end{tabular}
+						\hskip 3mm
+						\relax
+						Uhr
+						\par
+					}
+					\vskip 1mm
+					\relax
+					im Original
+					erhalten zu haben
+		%			und diese dem
+					sowie
+		%			%die dem Absender gegenüber erklärte Absicht,
+					die Absicht,
+		%			es der Person oder Stelle,
+		%			%an welche es gerichtet ist,
+		%			an welche dieses gerichtet ist,
+		%			%an welche dieses sich richtet,
+		%			%an welche ich es richte,
+		%			%an welche ich es gerichtet habe,
+		%			zeitnah
+		%			%zukommen zu lassen,
+		%			weiterzuleiten,
+		%			falls diese eine andere ist als diejenige, der ich es übergebe, oder diese nicht zu der Stelle gehört, an die ich dieses Schreiben richte.
+					es zeitnah und unverändert der zuständigen Person oder Stelle, an welche es gerichtet ist, weiterzuleiten.%
+				\else%
+					%Dieses Schreiben wird zweimal ausgedruckt. %< could be more than twice
+					Dieses Schreiben wird
+					zur Weiterleitung an die zuständige Stelle
+					ausgedruckt
+					%vom Absender
+					%persönlich
+					einem Empfangsberechtigten
+					übergeben,
+					welcher
+					%Eine zweite Ausfertigung wird vom Empfangsberechtigten  und vom Absender einbehalten.
+					%den Empfang
+					%die persönliche Übergabe
+					die Übernahme und Weiterleitung desselben
+					auf einer weiteren, vom Absender einbehaltenen Ausfertigung
+					bestätigt.
+					%quittiert.
+				\fi%
+			}
+	}
+% Standardbrief
+% Kompaktbrief
+% Maxi–Brief
+% Einschreiben
+% Einschreiben–Einwurf
+\newcommand
+	{\DeliveryPost}
+	[1]
+	{
+		\@Delivery@printed
+		\setkomavar
+			{specialmail}
+			{#1}
+		\@Delivery@PS
+			{%
+%				Dieses Schreiben wird dem Empfänger als
+%				%%einfacher
+%				%Brief
+%				#1
+%				ohne Sendungsverfolgung zugesandt. Erhalt bitte bestätigen.%
+				%Dieses Schreiben wird ohne Sendungsverfolgung versandt. Erhalt deswegen bitte bestätigen.%
+				Ohne Sendungsverfolgung versandt~---~Erhalt bitte bestätigen.%
+				%Ohne Sendungsverfolgung versandt~---~bitte Erhalt bestätigen.%
+			}
+	}
+\newcommand
+	{\@Delivery@digital}
+	{
+		\def
+			\raggedsignature
+			{\raggedleft}
+		\setplength
+			{sigbeforevskip}
+			{\baselineskip}
+	}
+\newcommand
+	{\@Delivery@printed}
+	{
+		\def
+			\raggedsignature
+			{\centering}
+		\addtoplength
+			[0.5]
+			{sigbeforevskip}
+			{\useplength{sigbeforevskip}}
+	}
+\newcommand
+	{\@Delivery@PS}
+	[1]
+	{%
+		\AtEndLetter
+			{%
+				\ps%
+				\footnotesize%
+				\vfill%
+				\vbox
+					{
+						{%
+							\bfseries%
+							\ifcurrentbaselanguage
+								{german}
+								%{Vermerk zur Sendung dieses Schreibens}
+								%{Vermerk zur Lieferung dieses Schreibens} %< Lieferung=Warenversand
+								%{Vermerk zur Zustellung dieses Schreibens}
+								%{Vermerk zur Beförderung dieses Schreibens}
+								%{Vermerk über den Versand dieses Schreibens}
+								%{Vermerk zum Versand dieses Schreibens}
+								%{Anmerkung zu}
+								%{Zustellvermerk}
+								%{Versendungsvermerk}
+								{Vermerk}
+								{}%
+						}%
+						\vskip 2mm%
+						\relax%
+						\hrule%
+						#1%
+					}%
+			}%
+	}
+\newenvironment
+	{tabbed}
+	[1]
+	{%
+		\\*[\pretabularskip]%
+		\begin{tabular}{#1}%
+	}
+	{%
+		\end{tabular}%
+		\\*[\posttabularskip]%
+	}
+%\newcommand
+%	{\anlage}
+%	[2]
+%	[FIXME]
+%	{%
+%		\ifpost%
+%			\setkomavar*
+%				{enclseparator}
+%				{%
+%					\IfLanguageName
+%						{english}
+%						{Enclosed}
+%						{}%
+%					\IfLanguageName
+%						{ngerman}
+%						{Beigefügt}
+%						{}%
+%					\IfLanguageName
+%						{spanish}
+%						{Incluído}
+%						{}%
+%				}%
+%			\encl{%
+%				#2%
+%			}%
+%		\fi%
+%		\ifemail%
+%			\setkomavar*%
+%				{enclseparator}%
+%				{%
+%					\IfLanguageName
+%						{english}
+%						{Attached}
+%						{}%
+%					\IfLanguageName
+%						{ngerman}
+%						{Anhang}
+%						{}%
+%					\IfLanguageName
+%						{spanish}
+%						{Adjunto}
+%						{}%
+%				}%
+%			\encl{%
+%				\renewcommand
+%					{\arraystretch}
+%					{1.25}%
+%				\begin{tabular}[t]{ >{\ttfamily} p{42mm} p{87mm} }%
+%					#1%
+%					&%
+%					#2%
+%					\\%
+%				\end{tabular}%
+%			}%
+%		\fi%
+%	}
+%\newenvironment
+%	{anlagen}
+%	{%
+%		\ifpost%
+%			\setkomavar*
+%				{enclseparator}
+%				{%
+%					\IfLanguageName
+%						{english}
+%						{Enclosed}
+%						{}%
+%					\IfLanguageName
+%						{ngerman}
+%						{Beigefügt}
+%						{}%
+%					\IfLanguageName
+%						{spanish}
+%						{Incluído}
+%						{}%
+%				}%
+%			\expandafter%
+%			\encl%
+%			\begin{enumerate}%
+%		\fi%
+%		\ifemail%
+%			\setkomavar*%
+%				{enclseparator}%
+%				{%
+%					\IfLanguageName
+%						{english}
+%						{Attached}
+%						{}%
+%					\IfLanguageName
+%						{ngerman}
+%						{Anhang}
+%						{}%
+%					\IfLanguageName
+%						{spanish}
+%						{Adjunto}
+%						{}%
+%				}%
+%			\renewcommand
+%				{\arraystretch}
+%				{1.25}%
+%			\expandafter%
+%			\encl%
+%			\begin{tabular}[t]{ >{\ttfamily} p{42mm} p{87mm} }%
+%		\fi%
+%	}
+%	{%
+%		\ifpost%
+%			\end{enumerate}%
+%		\fi%
+%		\ifemail%
+%			\end{tabular}%
+%		\fi%
+%	}
+
+
+\KOMAoption{addrfield}{yes}
+\KOMAoption{backaddress}{yes}
+\KOMAoption{enlargefirstpage}{yes}
+\KOMAoption{firstfoot}{yes}
+\KOMAoption{firsthead}{yes}
+\KOMAoption{foldmarks}{BMPT}
+\KOMAoption{fontsize}{11pt}
+\KOMAoption{footsepline}{yes}
+\KOMAoption{headsepline}{yes}
+\KOMAoption{locfield}{wide}
+\KOMAoption{numericaldate}{no}
+\KOMAoption{pagenumber}{botright}
+\KOMAoption{subject}{titled}
+
+%\setplength
+%	{sigindent}
+%	{0sp}
+\setplength
+	{specialmailindent}
+	{0sp}
+\setplength
+	{toaddrindent}
+	{0sp}
+
+\setkomafont
+	{addressee}
+	{%
+		\inconsolata%
+		%\fontsize{11pt}{14pt}%
+		%\selectfont%
+	}
+\setkomafont
+	{backaddress}
+	{%
+		\sffamily%
+		\selectfont%
+	}
+\setkomafont
+	{pageheadfoot}
+	{%
+		\normalfont%
+		\selectfont%
+	}
+\setkomafont
+	{refvalue}
+	{%
+		\sffamily%
+		\selectfont%
+	}
+\setkomafont
+	{specialmail}
+	{%
+		\texgyrepagella%
+		\scshape%
+		%\sffamily%
+		%%\bfseries%
+		\footnotesize%
+	}
+
+\setkomavar
+	{firstfoot}
+	{%
+		\hrule%
+		\vskip 2mm%
+		\relax%
+		\usekomafont{pageheadfoot}%
+		\usekomafont{pagefoot}%
+		\hbox to \useplength{firstfootwidth}
+			{%
+				\ifprinted%
+					\ifnum\getpagerefnumber{\thisletter.lastpage}>1%
+						\@duplexnotice%
+					\fi%
+				\fi%
+				\hfil%
+				\hbox
+					{%
+						\pagemark%
+					}%
+			}%
+	}
+\setkomavar
+	{nextfoot}
+	{%
+		\usekomafont{pageheadfoot}%
+		\usekomafont{pagefoot}%
+		\hbox to \textwidth
+			{%
+				\ifprinted%
+					\Ifthispageodd
+						{%
+							\ifnum\thepage<\getpagerefnumber{\thisletter.lastpage}%
+								\@duplexnotice%
+							\fi
+						}
+						{}%
+				\fi%
+				\hfil%
+				\hbox
+					{%
+						\pagemark%
+					}%
+			}%
+	}
+\setkomavar
+	{nexthead}
+	{%
+		\hfil%
+		\bfseries%
+		\Ifkomavarempty
+			{title}
+			{%
+				\usekomavar{subject}%
+			}
+			{%
+				\usekomavar{title}%
+			}%
+		\hfil%
+	}
+\setkomavar*
+	{subjectseparator}
+	{Betreff}
+
+\IfLanguageName
+	{ngerman}
+	{
+%		\setkomavar*
+%			{fromname}
+%			{Absender}
+		\setkomavar
+			{placeseparator}
+			{, den }
+	}
+	{}
+
+\AtBeginDocument
+	[hypersetup]
+	{%
+		\begingroup%
+			\Ifkomavarempty
+				{title}
+				{
+%					\def%
+%						\@title%
+%						{%
+%							\IfLanguageName
+%								{english}
+%								{Letter}
+%								{}%
+%							\IfLanguageName
+%								{ngerman}
+%								{Schreiben}
+%								{}%
+%							\IfLanguageName
+%								{spanish}
+%								{Escrito}
+%								{}%
+%						}
+					\usekomavar
+						[\def\@title]
+						{subject}%
+				}
+				{
+					\usekomavar%
+						[\def\@title]%
+						{title}%
+				}%
+%			\markboth
+%				{\@title}
+%				{\usekomavar{date}}
+			\usekomavar
+				[\def\@author]
+				{fromname}%
+			\usekomavar
+				[\def\@subject]
+				{subject}%
+			\def
+				\@pdflang
+				{%
+					\IfLanguageName
+						{english}
+						{en}
+						{}%
+					\IfLanguageName
+						{ngerman}
+						{de}
+						{}%
+					\IfLanguageName
+						{spanish}
+						{es}
+						{}%
+				}
+			\def
+				\@pdfduplex
+				{%
+					\ifprinted%
+						DuplexFlipLongEdge%
+					\else%
+						Simplex%
+					\fi%
+				}%
+			\hypersetup{
+				pdfauthor = {\@author},
+				pdflang = {\@pdflang},
+				pdfdisplaydoctitle = true,
+				pdfduplex = {\@pdfduplex},
+				pdfsubject = {\@subject},
+				%pdfsubtitle = {},
+				pdftitle = {\@title},
+			}%
+%			\ifprinted
+%				\hypersetup{
+%					hidelinks = true,
+%				}
+%			\else
+%				\hypersetup{
+%					colorlinks = true,
+%					linkcolor = blue,
+%					urlcolor = blue,
+%				}
+%			\fi
+		\endgroup%
+	}
+\DeclareHookRule{begindocument}{hypersetup}{before}{hyperref}
+
+% fontspec
+\directlua {
+   fonts.handlers.otf.addfeature {
+      name = "emailatkern",
+      type = "kern",
+      data = {
+         ["@"] = {
+            ["d"] = 100,
+            ["s"] = 60,
+         },
+         ["d"] = {
+            ["@"] = 100,
+         },
+         ["g"] = {
+            ["@"] = 60,
+         },
+      },
+   }
+   fonts.handlers.otf.addfeature {
+      name = "foobar",
+      type = "kern",
+      data = {
+         ["E"] = {
+            ["–"] = 80,%
+         },
+      },
+   }
+}
+%\setmainfont
+%	{URW Garamond}
+%	{C059}
+%	{Free Serif}
+%	{Nimbus Roman}
+%	{Noto Serif}
+%	{P052}
+%	{URW Bookman Light}
+%	{Z003 Medium Italic}
+\setmonofont
+	{Latin Modern Mono}
+	[
+		RawFeature={+emailatkern},
+	]
+\newfontfamily
+	\inconsolata% mr = machine-readable
+	{Inconsolata}
+	[
+		LetterSpace=2,
+	]
+\newfontfamily
+	\ttspaced
+	{Latin Modern Mono}
+	[
+		LetterSpace=10,
+		RawFeature={+emailatkern},
+	]
+\newfontfamily
+	\texgyrepagella
+	{TeX Gyre Pagella}
+	[
+		%Letters=SmallCaps,
+		LetterSpace=10,
+		%SmallCapsFeatures={Letters=SmallCaps},
+	]
