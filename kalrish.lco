@@ -550,7 +550,6 @@
 \KOMAoption{locfield}{wide}
 \KOMAoption{numericaldate}{no}
 \KOMAoption{pagenumber}{botright}
-\KOMAoption{subject}{titled}
 
 % captions
 %  emailname
