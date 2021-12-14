@@ -562,6 +562,13 @@
 	}
 	{\emailname}
 	{E-Mail}
+%  mobilephonename
+\defcaptionname
+	{
+		spanish
+	}
+	{\mobilephonename}
+	{Teléfono}
 %  wwwname
 \defcaptionname
 	{
