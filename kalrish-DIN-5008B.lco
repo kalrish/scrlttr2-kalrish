@@ -90,7 +90,7 @@
 \setkomafont
 	{refvalue}
 	{%
-		\ttfamily%
+		\ttspaced%
 		\small%
 	}
 
