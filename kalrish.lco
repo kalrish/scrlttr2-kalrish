@@ -557,6 +557,7 @@
 \defcaptionname
 	{
 		english,
+		german,
 		ngerman,
 		spanish
 	}
@@ -566,6 +567,7 @@
 \defcaptionname
 	{
 		english,
+		german,
 		ngerman,
 		spanish
 	}

@@ -49,6 +49,7 @@
 %  yourrefname
 \defcaptionname
 	{
+		german,
 		ngerman
 	}
 	{\yourrefname}
