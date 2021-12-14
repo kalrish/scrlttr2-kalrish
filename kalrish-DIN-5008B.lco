@@ -56,7 +56,12 @@
 	{mit dem Zeichen}
 
 \KOMAoption{fromalign}{left}
+\KOMAoption{fromemail}{no}
+\KOMAoption{fromfax}{no}
+\KOMAoption{frommobilephone}{no}
+\KOMAoption{fromphone}{no}
 \KOMAoption{fromrule}{afteraddress}
+\KOMAoption{fromurl}{no}
 \KOMAoption{numericaldate}{no}
 %\KOMAoption{numericaldate}{yes}
 %\KOMAoption{refline}{nodate}
