@@ -4,7 +4,7 @@
 \RequirePackage
 	{array}
 \RequirePackage
-	{iflang}
+	{translations}
 \RequirePackage
 	{fontspec}
 %\RequirePackage
@@ -65,15 +65,15 @@
 		~%
 		\thepage%
 		~%
-		\IfLanguageName
+		\ifcurrentbaselanguage
 			{english}
 			{of}
 			{}%
-		\IfLanguageName
-			{ngerman}
+		\ifcurrentbaselanguage
+			{german}
 			{von}
 			{}%
-		\IfLanguageName
+		\ifcurrentbaselanguage
 			{spanish}
 			{de}
 			{}%
@@ -143,15 +143,15 @@
 %		\setkomavar
 %			{specialmail}
 %			{%
-%				\IfLanguageName
+%				\ifcurrentbaselanguage
 %					{english}
 %					{as~E-Mail~to}
 %					{}%
-%				\IfLanguageName
-%					{ngerman}
+%				\ifcurrentbaselanguage
+%					{german}
 %					{per~E-Mail~an}
 %					{}%
-%				\IfLanguageName
+%				\ifcurrentbaselanguage
 %					{spanish}
 %					{por~E-Mail~a}
 %					{}%
@@ -432,15 +432,15 @@
 %			\setkomavar*
 %				{enclseparator}
 %				{%
-%					\IfLanguageName
+%					\ifcurrentbaselanguage
 %						{english}
 %						{Enclosed}
 %						{}%
-%					\IfLanguageName
-%						{ngerman}
+%					\ifcurrentbaselanguage
+%						{german}
 %						{Beigefügt}
 %						{}%
-%					\IfLanguageName
+%					\ifcurrentbaselanguage
 %						{spanish}
 %						{Incluído}
 %						{}%
@@ -453,15 +453,15 @@
 %			\setkomavar*%
 %				{enclseparator}%
 %				{%
-%					\IfLanguageName
+%					\ifcurrentbaselanguage
 %						{english}
 %						{Attached}
 %						{}%
-%					\IfLanguageName
-%						{ngerman}
+%					\ifcurrentbaselanguage
+%						{german}
 %						{Anhang}
 %						{}%
-%					\IfLanguageName
+%					\ifcurrentbaselanguage
 %						{spanish}
 %						{Adjunto}
 %						{}%
@@ -486,15 +486,15 @@
 %			\setkomavar*
 %				{enclseparator}
 %				{%
-%					\IfLanguageName
+%					\ifcurrentbaselanguage
 %						{english}
 %						{Enclosed}
 %						{}%
-%					\IfLanguageName
-%						{ngerman}
+%					\ifcurrentbaselanguage
+%						{german}
 %						{Beigefügt}
 %						{}%
-%					\IfLanguageName
+%					\ifcurrentbaselanguage
 %						{spanish}
 %						{Incluído}
 %						{}%
@@ -507,15 +507,15 @@
 %			\setkomavar*%
 %				{enclseparator}%
 %				{%
-%					\IfLanguageName
+%					\ifcurrentbaselanguage
 %						{english}
 %						{Attached}
 %						{}%
-%					\IfLanguageName
-%						{ngerman}
+%					\ifcurrentbaselanguage
+%						{german}
 %						{Anhang}
 %						{}%
-%					\IfLanguageName
+%					\ifcurrentbaselanguage
 %						{spanish}
 %						{Adjunto}
 %						{}%
@@ -681,8 +681,8 @@
 	{subjectseparator}
 	{Betreff}
 
-\IfLanguageName
-	{ngerman}
+\ifcurrentbaselanguage
+	{german}
 	{
 %		\setkomavar*
 %			{fromname}
@@ -703,15 +703,15 @@
 %					\def%
 %						\@title%
 %						{%
-%							\IfLanguageName
+%							\ifcurrentbaselanguage
 %								{english}
 %								{Letter}
 %								{}%
-%							\IfLanguageName
-%								{ngerman}
+%							\ifcurrentbaselanguage
+%								{german}
 %								{Schreiben}
 %								{}%
-%							\IfLanguageName
+%							\ifcurrentbaselanguage
 %								{spanish}
 %								{Escrito}
 %								{}%
@@ -737,15 +737,15 @@
 			\def
 				\@pdflang
 				{%
-					\IfLanguageName
+					\ifcurrentbaselanguage
 						{english}
 						{en}
 						{}%
-					\IfLanguageName
-						{ngerman}
+					\ifcurrentbaselanguage
+						{german}
 						{de}
 						{}%
-					\IfLanguageName
+					\ifcurrentbaselanguage
 						{spanish}
 						{es}
 						{}%
