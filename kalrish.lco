@@ -552,6 +552,17 @@
 \KOMAoption{pagenumber}{botright}
 \KOMAoption{subject}{titled}
 
+% captions
+%  emailname
+\defcaptionname
+	{
+		english,
+		ngerman,
+		spanish
+	}
+	{\emailname}
+	{E-Mail}
+
 %\setplength
 %	{sigindent}
 %	{0sp}
