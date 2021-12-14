@@ -562,6 +562,15 @@
 	}
 	{\emailname}
 	{E-Mail}
+%  wwwname
+\defcaptionname
+	{
+		english,
+		ngerman,
+		spanish
+	}
+	{\wwwname}
+	{Website}
 
 %\setplength
 %	{sigindent}
