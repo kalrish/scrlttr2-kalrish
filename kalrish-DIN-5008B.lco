@@ -55,7 +55,6 @@
 	{\yourrefname}
 	{mit dem Zeichen}
 
-\KOMAoption{backaddress}{underlined}
 \KOMAoption{fromalign}{left}
 \KOMAoption{fromrule}{afteraddress}
 \KOMAoption{numericaldate}{no}
@@ -93,17 +92,6 @@
 \newkomavar{prelocation}
 \newkomavar{references}
 
-\setkomavar
-	{backaddressseparator}
-	{%
-		\kern
-			.137em
-			\relax%
-		\cdotp%
-		\kern
-			.137em
-			\relax%
-	}
 \setkomavar
 	{location}
 	{%

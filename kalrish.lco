@@ -539,7 +539,7 @@
 
 
 \KOMAoption{addrfield}{yes}
-\KOMAoption{backaddress}{yes}
+\KOMAoption{backaddress}{no}
 \KOMAoption{enlargefirstpage}{yes}
 \KOMAoption{firstfoot}{yes}
 \KOMAoption{firsthead}{yes}
@@ -590,12 +590,6 @@
 		\inconsolata%
 		%\fontsize{11pt}{14pt}%
 		%\selectfont%
-	}
-\setkomafont
-	{backaddress}
-	{%
-		\sffamily%
-		\selectfont%
 	}
 \setkomafont
 	{pageheadfoot}
