@@ -344,17 +344,6 @@
 	[1]
 	{
 		\@Delivery@printed
-		\@Delivery@PS
-			{%
-%				Dieses Schreiben wird dem Empfänger als
-%				%%einfacher
-%				%Brief
-%				#1
-%				ohne Sendungsverfolgung zugesandt. Erhalt bitte bestätigen.%
-				%Dieses Schreiben wird ohne Sendungsverfolgung versandt. Erhalt deswegen bitte bestätigen.%
-				Ohne Sendungsverfolgung versandt~---~Erhalt bitte bestätigen.%
-				%Ohne Sendungsverfolgung versandt~---~bitte Erhalt bestätigen.%
-			}
 	}
 \newcommand
 	{\@Delivery@digital}
