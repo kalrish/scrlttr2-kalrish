@@ -1,6 +1,8 @@
 \ProvidesFile
 	{mine.lco}
 
+\LetterOptionNeedsPapersize{a4}{a4}
+
 \RequirePackage
 	{array}
 \RequirePackage
