@@ -344,9 +344,6 @@
 	[1]
 	{
 		\@Delivery@printed
-		\setkomavar
-			{specialmail}
-			{#1}
 		\@Delivery@PS
 			{%
 %				Dieses Schreiben wird dem Empfänger als
