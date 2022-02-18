@@ -557,6 +557,13 @@
 %  mobilephonename
 \defcaptionname
 	{
+		english
+	}
+	{\mobilephonename}
+	%{Phone number}
+	{Phone}
+\defcaptionname
+	{
 		spanish
 	}
 	{\mobilephonename}
