@@ -63,8 +63,8 @@
 \setlength{\posttabularskip}{\tabularskip}
 \setlength{\pretabularskip}{\tabularskip}
 
-\renewcommand*
-	\pagemark
+\newcommand*
+	\kalrish@pagemark
 	{%
 		\usekomafont{pagenumber}%
 		\pagename%
@@ -91,8 +91,8 @@
 \DeclareTextFontCommand
 	{\emph}
 	{\bfseries}
-\newcommand
-	{\@duplexnotice}
+\newcommand*
+	{\kalrish@duplexnotice}
 	{%
 		\hbox
 			{%
@@ -623,13 +623,13 @@
 			{%
 				\ifprinted%
 					\ifnum\getpagerefnumber{\thisletter.lastpage}>1%
-						\@duplexnotice%
+						\kalrish@duplexnotice%
 					\fi%
 				\fi%
 				\hfil%
 				\hbox
 					{%
-						\pagemark%
+						\kalrish@pagemark%
 					}%
 			}%
 	}
@@ -644,7 +644,7 @@
 					\Ifthispageodd
 						{%
 							\ifnum\thepage<\getpagerefnumber{\thisletter.lastpage}%
-								\@duplexnotice%
+								\kalrish@duplexnotice%
 							\fi
 						}
 						{}%
@@ -652,7 +652,7 @@
 				\hfil%
 				\hbox
 					{%
-						\pagemark%
+						\kalrish@pagemark%
 					}%
 			}%
 	}
