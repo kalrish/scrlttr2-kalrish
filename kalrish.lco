@@ -55,11 +55,13 @@
 
 \newlength{\tabcolLlength}
 \newlength{\tabcolRlength}
+\newlength{\tabularskip}
 \newlength{\posttabularskip}
 \newlength{\pretabularskip}
 
-\setlength{\posttabularskip}{.35\baselineskip}
-\setlength{\pretabularskip}{.35\baselineskip}
+\setlength{\tabularskip}{.35\baselineskip}
+\setlength{\posttabularskip}{\tabularskip}
+\setlength{\pretabularskip}{\tabularskip}
 
 \renewcommand*
 	\pagemark
