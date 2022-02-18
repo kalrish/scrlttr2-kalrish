@@ -38,7 +38,9 @@
 \fi
 
 
-\pagestyle{myheadings}
+\renewcommand*
+	{\letterpagestyle}
+	{myheadings}
 %\markboth
 %	{%
 %		\Ifkomavarempty
