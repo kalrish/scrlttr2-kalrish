@@ -109,7 +109,7 @@
 				beidseitig bedruckt
 			}%
 	}
-\newcommand
+\newcommand*
 	{\DeliveryCertified}
 	[2]
 	{
@@ -141,7 +141,7 @@
 	%			dokumentiert.%
 			}
 	}
-\newcommand
+\newcommand*
 	{\DeliveryEmail}
 	[1]
 	{
@@ -197,7 +197,7 @@
 				zugesandt.
 			}
 	}
-\newcommand
+\newcommand*
 	{\DeliveryFaxDigital}
 	[1]
 	{
@@ -212,7 +212,7 @@
 				An Faxnummer #1.%
 			}
 	}
-\newcommand
+\newcommand*
 	{\DeliveryFaxPrinted}
 	[1]
 	{
@@ -228,7 +228,7 @@
 				zugesandt.%
 			}
 	}
-\newcommand
+\newcommand*
 	{\DeliveryPersonal}
 	{
 		\@Delivery@printed
@@ -343,13 +343,13 @@
 % Maxi–Brief
 % Einschreiben
 % Einschreiben–Einwurf
-\newcommand
+\newcommand*
 	{\DeliveryPost}
 	[1]
 	{
 		\@Delivery@printed
 	}
-\newcommand
+\newcommand*
 	{\@Delivery@digital}
 	{
 		\def
@@ -359,7 +359,7 @@
 			{sigbeforevskip}
 			{\baselineskip}
 	}
-\newcommand
+\newcommand*
 	{\@Delivery@printed}
 	{
 		\def
@@ -370,7 +370,7 @@
 			{sigbeforevskip}
 			{\useplength{sigbeforevskip}}
 	}
-\newcommand
+\newcommand*
 	{\@Delivery@PS}
 	[1]
 	{%
